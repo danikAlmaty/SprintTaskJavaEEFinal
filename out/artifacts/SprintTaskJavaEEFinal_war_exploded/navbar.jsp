@@ -20,7 +20,7 @@
                         <a class="nav-link" href="#">Pricing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
+                        <a class="nav-link" href="/sign-up">Sign Up</a>
                     </li>
                     <%
                         if (currentUser!=null){

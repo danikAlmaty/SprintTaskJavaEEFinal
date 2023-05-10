@@ -195,7 +195,7 @@ public class DBConnection {
     }
 
     public static User getUser(String email){
-        User user = new User();
+        User user = null;
 
         try{
             PreparedStatement statement = connection.prepareStatement("" +
@@ -226,6 +226,57 @@ public class DBConnection {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public static void addUser(User user){
+        try{
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "INSERT INTO public.users (email, password, full_name, role_id) " +
+                    "VALUES (?, ?, ?, ?)");
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getFull_name());
+            statement.setLong(4, user.getRole_id().getId());
+
+            statement.executeUpdate();
+            statement.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void addComment(Comment comment){
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "INSERT INTO public.comments (comment, post_date, user_id, news_id) " +
+                    "VALUES (?, NOW()::timestamp, ?, ?)");
+            statement.setString(1, comment.getComment());
+            statement.setLong(2, comment.getUser().getId());
+            statement.setLong(3, comment.getNews().getId());
+
+            statement.executeUpdate();
+            statement.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
+    public static ArrayList<Comment> getComments(){
+        ArrayList<Comment> comments = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "SELECT c.id, c.comment, c.user_id, c.news_id, c.post_date " +
+                    "FROM public.comments as c INNER JOIN public.news ");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return comments;
     }
 }
 

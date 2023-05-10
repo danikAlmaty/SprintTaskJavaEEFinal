@@ -202,6 +202,64 @@
     <%
         }
     %>
+
+    <div class="container">
+        <div class="row">
+            <form action="/add-comment" method="post">
+                <input type="hidden" name="add_news_id" value="<%=news.getId()%>">
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <label>Content: </label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <textarea name="comment" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <button class="btn btn-success">ADD COMMENT</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <label>Author </label>
+                    </div>
+                </div>
+
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <label>Content: </label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <textarea name="comment" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <button class="btn btn-success">ADD COMMENT</button>
+                    </div>
+                </div>
+        </div>
+    </div>
 </div>
 
 </body>

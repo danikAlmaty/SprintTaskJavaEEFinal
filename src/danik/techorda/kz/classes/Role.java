@@ -4,6 +4,8 @@ public class Role {
     private long id;
     private String role_description;
 
+
+
     public long getId() {
         return id;
     }
