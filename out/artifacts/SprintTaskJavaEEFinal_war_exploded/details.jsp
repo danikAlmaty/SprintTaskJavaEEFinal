@@ -2,6 +2,7 @@
 <%@ page import="java.lang.reflect.Array" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="danik.techorda.kz.classes.Category" %>
+<%@ page import="danik.techorda.kz.classes.Comment" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -199,6 +200,69 @@
 
     %>
     <h3 class="text-center">I can't find this news</h3>
+    <%
+        }
+    %>
+
+    <%
+        if (currentUser!=null){
+    %>
+
+    <div class="container">
+        <div class="row">
+            <form action="/add-comment" method="post">
+                <input type="hidden" name="add_news_id" value="<%=news.getId()%>">
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <label>Content: </label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <textarea name="comment" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <button class="btn btn-success">ADD COMMENT</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="list-group">
+                <%
+                    ArrayList<Comment> comments = (ArrayList<Comment>) request.getAttribute("commentter");
+                    if (comments!=null){
+
+                    for (Comment com : comments){
+                %>
+
+                <a href="JavaScript:void(0)" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><%=com.getUser().getFull_name()%></h5>
+                        <small class="text-body-secondary"><%=com.getPost_date().toString().substring(0, 19)%></small>
+                    </div>
+                    <p class="mb-1"><%=com.getComment()%></p>
+                </a>
+
+                <%
+                        }
+                    }
+                %>
+
+            </div>
+
+        </div>
+    </div>
+
     <%
         }
     %>

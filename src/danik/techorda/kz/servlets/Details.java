@@ -1,9 +1,6 @@
 package danik.techorda.kz.servlets;
 
-import danik.techorda.kz.classes.Category;
-import danik.techorda.kz.classes.DBConnection;
-import danik.techorda.kz.classes.News;
-import danik.techorda.kz.classes.User;
+import danik.techorda.kz.classes.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,9 +30,11 @@ public class Details extends HttpServlet {
 
             News newsById = DBConnection.getNewsById(id);
             ArrayList<Category> categories = DBConnection.getCategories();
+            ArrayList<Comment> comments = DBConnection.getComments(id);
 
             request.setAttribute("newsOne", newsById);
             request.setAttribute("categories", categories);
+            request.setAttribute("commentter", comments);
             request.getRequestDispatcher("details.jsp").forward(request, response);
         }else {
             response.sendRedirect("/login");

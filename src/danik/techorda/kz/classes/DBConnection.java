@@ -265,13 +265,33 @@ public class DBConnection {
 
     }
 
-    public static ArrayList<Comment> getComments(){
+    public static ArrayList<Comment> getComments(Long id){
         ArrayList<Comment> comments = new ArrayList<>();
 
         try {
             PreparedStatement statement = connection.prepareStatement("" +
-                    "SELECT c.id, c.comment, c.user_id, c.news_id, c.post_date " +
-                    "FROM public.comments as c INNER JOIN public.news ");
+                    "SELECT c.id, c.comment, c.user_id, c.news_id, c.post_date, us.full_name " +
+                    "FROM public.comments as c INNER JOIN public.users as us ON " +
+                    "c.user_id = us.id " +
+                    "WHERE c.news_id = ?");
+            statement.setLong(1, id);
+
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                Comment comment = new Comment();
+                comment.setComment(resultSet.getString("comment"));
+                comment.setId(resultSet.getLong("id"));
+                comment.setPost_date(resultSet.getTimestamp("post_date"));
+
+                User user = new User();
+                user.setFull_name(resultSet.getString("full_name"));
+
+                comment.setUser(user);
+                comments.add(comment);
+            }
+
+            statement.close();
         }catch (Exception e){
             e.printStackTrace();
         }
