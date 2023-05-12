@@ -245,6 +245,26 @@ public class DBConnection {
         }
     }
 
+
+    public static void updateUser(User user){
+        try{
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "UPDATE public.users " +
+                    "SET password = ?, " +
+                    "full_name = ? " +
+                    "WHERE id = ?");
+
+            statement.setString(1, user.getPassword());
+            statement.setString(2, user.getFull_name());
+            statement.setLong(3, user.getId());
+
+            statement.executeUpdate();
+            statement.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public static void addComment(Comment comment){
         try {
             PreparedStatement statement = connection.prepareStatement("" +

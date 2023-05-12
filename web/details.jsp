@@ -235,7 +235,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-12">
             <div class="list-group">
                 <%
